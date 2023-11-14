@@ -16,29 +16,18 @@ class PhotosController < ApplicationController
     end
   end
 
-  def convertUserDateTimeToUtc
+  def show
     # Create a DateTime object in user's local timezone
     local_date = DateTime.now
-    
-    # Convert the local DateTime to UTC timezone
-    utc_date = local_date.new_offset(0)
-    
-    # Set the converted UTC DateTime to midnight (00:00:00)
-    utc_date = DateTime.new(utc_date.year, utc_date.month, utc_date.day, 0, 0, 0, 0)
-    
+
+    utc_date = local_date.in_time_zone("UTC").beginning_of_day
+        
     @photo = Photo.find_by(date: utc_date)
-    puts "!!!!!!!!!!!!!!!!!"
-    puts @photo.date.to_datetime
 
-    if @photo.date.to_datetime == utc_date
-      puts "formatted_nasa_date == users_current_time_to_midnight_utc"
+    if @photo && @photo.date == utc_date
+      render json: {photo: @photo}
     else
-      puts "formatted_nasa_date != users_current_time_to_midnight_utc"
+      create()
     end
-  end
-
-  def convertNasaDateToUtcDateTime()
-    formatted_nasa_date = DateTime.strptime("#{data["date"]} 00:00:00", "%Y-%m-%d %H:%M:%S")
-    return formatted_nasa_date
   end
 end
