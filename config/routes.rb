@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   post "/apod" => "photos#create"
   get "/apod" => "photos#show"
-  get "/apodtest" => "photos#datetime"
+  get "/datetime" => "photos#convertUserDateTimeToUtc"
 
   post "/post" => "posts#create"
   patch "/post" => "posts#update"
