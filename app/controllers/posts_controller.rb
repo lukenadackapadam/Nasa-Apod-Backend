@@ -1,8 +1,14 @@
 class PostsController < ApplicationController
+  def index
+    @posts = Post.all
+    render :index
+  end
+
   def create
     @post = Post.create(
-      user_id: current_user.id,
-      comment: params[:comment]
+      user_id: params[:user_id],
+      photo_id: params[:photo_id],
+      post: params[:post],
     )
     if @post.save
       render json: { message: "Post created successfully" }, status: :created
