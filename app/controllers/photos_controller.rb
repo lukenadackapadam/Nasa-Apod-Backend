@@ -25,7 +25,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find_by(date: utc_date)
 
     if @photo && @photo.date == utc_date
-      render json: {photo: @photo}
+      render :show
     else
       create()
     end

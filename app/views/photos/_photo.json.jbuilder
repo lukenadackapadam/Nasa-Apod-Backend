@@ -1,2 +1,1 @@
-json.extract! photo, :id, :created_at, :updated_at
-json.url photo_url(photo, format: :json)
+json.extract! photo, :id, :title, :date, :explanation, :hdurl, :created_at, :updated_at
