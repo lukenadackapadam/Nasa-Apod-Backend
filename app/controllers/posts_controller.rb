@@ -1,7 +1,13 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.all()
     render :index
+  end
+
+  def posts_by_photo
+    posts = Post.where(photo_id: params[:photo_id])
+    render json: posts
+    pp(posts)
   end
 
   def create

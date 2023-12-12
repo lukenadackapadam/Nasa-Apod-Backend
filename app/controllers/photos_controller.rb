@@ -1,4 +1,9 @@
 class PhotosController < ApplicationController
+  def index
+    @photos = Photo.all()
+    render :index
+  end
+
   def create
     response = HTTP.get("https://api.nasa.gov/planetary/apod?api_key=#{ENV["NASA_API_KEY"]}")
     data = JSON.parse(response.body)
