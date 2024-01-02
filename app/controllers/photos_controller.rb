@@ -26,6 +26,14 @@ class PhotosController < ApplicationController
     data = JSON.parse(response.body)
     title = data["title"]
 
+    headers = response.headers
+    
+    puts "X-RATELIMIT-LIMIT"
+    puts headers['x-ratelimit-limit']
+
+    puts "X-RATELIMIT-REMAINING"
+    puts headers['x-ratelimit-remaining']
+
     photo = Photo.find_by(title: title)
     
     if photo != nil
