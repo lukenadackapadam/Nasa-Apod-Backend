@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @photos = Photo.all()
     render :index
@@ -15,9 +17,10 @@ class PhotosController < ApplicationController
       hdurl: data["hdurl"],
     )
     if photo.save
-      render json: { message: "Photo saved successfully", photo: photo }
+      # render json: { message: "Photo saved successfully", photo: photo }
+      render json: photo
     else
-      render json: { error: "Failed to save photo", errors: photo.errors.full_messages }
+      render json: photo.errors.full_messages 
     end
   end
 
