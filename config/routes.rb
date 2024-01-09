@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  post "/users" => "users#create"
   post "/sessions" => "sessions#create"
-  post "/user" => "users#create"
+  get "/login" => "sessions#new"
+  get "/logout" => "sessions#destroy"
 
   get "/apod_all" => "photos#index"
   get "/apod" => "photos#show"
